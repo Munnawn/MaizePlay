@@ -1,0 +1,240 @@
+/* CSS */
+body {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #00274C;
+    background-color: #FFCB05;
+    width: 100%;
+    height: 100%;
+    margin: autox;
+}
+
+h1 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 100px;
+}
+
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#app {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.sport_options{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    position: relative;
+    top: 100px;
+
+}
+
+.sport_button{
+    background-color: transparent;
+    border: 10px solid;
+    border-color: #FFCB05;
+}
+
+.sport_button:hover {
+    background-color: #00274C;
+}
+
+.img{
+    height: 300px;
+    width: 300px;
+}
+
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    position: relative;
+    top: 150px;
+}
+
+#submit{
+    width: 350px;
+    height: 200px;
+    font-size: 50px;
+    background-color: #00274C;
+    color: #FFCB05;
+}
+
+#Home{
+    width: 150px;
+    height: 50px;
+    font-size: 20px;
+    background-color: #00274C;
+    color: #FFCB05;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
+
+#selected_sport{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 15px;
+}
+
+#selected{
+    width: 400px;
+    height: 400px;
+}
+
+#difficulty_container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.difficulty_button{
+    width: 350px;
+    height: 200px;
+    font-size: 50px;
+    background-color: #00274C;
+    color: #FFCB05;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+}
+
+.map_sc{
+    display: flex;
+    width: 100%;
+    height: auto;
+    position: relative;
+    
+}
+
+#map_container {
+    margin-left: 35px;
+    width: 70%;
+    height: 80%;
+    margin: 30px;
+    display: flex;
+}
+
+
+.games_list{
+    display: flex;
+    flex-direction: column;
+    width: 225px;
+    height: 750px;
+    background-color: #00274C;
+    border: solid;
+    border-width: 10px;
+    top: 140px;
+    position: absolute;
+    left: 80%;
+}
+
+#games_list_title {
+    top: 200px;
+    color: #FFCB05;
+    font-size: 30px;
+    text-align: center;
+}
+
+.game_button{
+    background-color: #FFCB05;
+    color: #00274C;
+    width: 100%;
+    padding: 20px;
+    height: 100px;
+    font-size: 15px;
+    text-align: center;
+    justify-content: center;
+}
+
+.create_game{
+    position: relative;
+    top: 80%;
+    height: 50px;
+    background-color: lime;
+    color: black;
+    font-weight: bold;
+}
+
+.new_game_info{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    font-size: 30px;
+    top: 100px;
+    left: 40%;
+    position: absolute;
+    margin-left: 35%;
+    margin-top: 10%;
+    justify-content: center;
+    align-content: center;
+}
+
+.ind_game_info{
+    width: 60%;
+    height: auto;
+    margin: 100px;
+    font-size: 30px;
+    position: absolute;
+    top: 100px;
+    left: 70%;
+}
+
+#game_id{
+    margin: 15px;
+    background-color: #00274C;
+    color: #FFCB05;
+    width: 300px;
+    height: 100px;
+    text-align: center;
+    font-size: 55px;
+}
+
+#join_game{
+    width: 150px;
+    height: 50px;
+    font-size: 20px;
+    background-color: lime;
+    color: black;
+    font-weight: bold;
+    position: relative;
+    bottom: 0px;
+    left: 0px;
+}
+
+#back_to_select{
+    width: 150px;
+    height: 50px;
+    font-size: 20px;
+    background-color: #00274C;
+    color: #FFCB05;
+    position: absolute;
+    top: 30px;
+    left: 210px;
+}
+
+#generate_game{
+    background-color: lime;
+}
+
+#loc_label{
+    position: absolute;
+    top: 120px;
+    left: 30px;
+    font-size: 25px;
+}
+
+#instruction{
+    text-align: center;
+    font-size: 50px;
+    margin: 20px;
+}

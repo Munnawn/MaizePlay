@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+   <title> MaizePlay</title>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+   <!-- Optional theme -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+      integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+      crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+   <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+   </title>
+
+   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+   
+   <script type="module">
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+         apiKey: "AIzaSyDg_fNwCq4QkQcUs5O1qta0jtPY0sE7738",
+         authDomain: "eecs493-maizeplay.firebaseapp.com",
+         projectId: "eecs493-maizeplay",
+         storageBucket: "eecs493-maizeplay.appspot.com",
+         messagingSenderId: "233632626707",
+         appId: "1:233632626707:web:33d7e992a6430dfab7e7e6",
+         measurementId: "G-720ZZLXQB4",
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+   </script>
+
+   <script src="script.js" defer></script>
+</head>
+<link rel="stylesheet" type="text/css" href="style.css">
+<!-- MAIZE PLAY HTML: -->
+
+<body>
+   <div id='app'>
+      <h1>
+         MaizePlay
+      </h1>
+
+      <!-- Home Button -->
+      <button id="Home">Home</button>
+
+      <!-- Landing Page -->
+      <div class="sport_options">
+         <button v-on:click="updateGames"   id="basketball_button" class="sport_button">
+            <img class="img" id="basketball" src="images/basketball.jpg">
+         </button>
+         <button v-on:click="updateGames"  id="football_button" class="sport_button">
+            <img class="img" id="football" src="images/football.jpg">
+         </button>
+         <button v-on:click="updateGames"  id="soccer_button" class="sport_button">
+            <img class="img" id="soccer" src="images/soccer.png">
+         </button>
+         <button v-on:click="updateGames"  id="golf_button" class="sport_button">
+            <img class="img" id="golf" src="images/golf.png">
+         </button>
+      </div>
+
+      <div id="button_container" class="container">
+         <button id="submit">
+            Find Games
+         </button>
+      </div>
+
+      <!-- Difficulty Select Page -->
+      <div id="selected_sport"></div>
+      <div id="instruction"><p>Select Your Desired Skill Level:</p></div>
+      <div id="difficulty_container">
+         <button v-on:click="updateGames" id="begin" class="difficulty_button">
+            Casual
+         </button>
+         <button v-on:click="updateGames" id="amateur" class="difficulty_button">
+            Intermediate
+         </button>
+         <button v-on:click="updateGames" id="pro" class="difficulty_button">
+            Pro
+         </button>
+      </div>
+
+      <!-- Map Page (with screenshot, not actual google maps) with sample games -->
+      <div class="games_list">
+         <div id="games_list_title"><b>Games</b></div>
+         <button class="create_game">Create New Game</button>
+         <div v-for="game in games">
+            <div v-show="game.sport==sport">
+               <div v-bind:key=renderKey v-show="game.level==difficulty">
+                  <button class="game_button" id="#001" v-on:click="showGameInfo(game)">
+                     <div>#{{game.label}}</div>
+                     <div>Date: {{game.date}}</div>
+                     <div>Players: {{game.numPlayers}}/{{game.totPlayers}}</div>
+                  </button>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div id="map_container">
+         <div id="map"></div>
+      </div>
+
+      
+
+      <!-- Interface for creating new game -->
+      <p id="loc_label"><b>Please click on the map to select the location:</b></p>
+      <div class="new_game_info" id="new_game_interface">
+         <label>Game Date: </label>
+         <input type="date" id="game_date" name="gamedate">
+         <label>Game Time: </label>
+         <input type="time" id="appt" name="appt">
+         <label>Max # Of Players: </label>
+         <input type="number" id="t_players" min="2">
+         <label>Confirmed # Of Players: </label>
+         <input type="number" id="c_players" min="1">
+         <br>
+         <button v-on:click="updateGames" id="generate_game">Post Game</button>
+      </div>
+
+      <!-- Individual Game Page -->
+      <button id="back_to_select">Back</button>
+      <div class="ind_game_info" id="ind_game_interface" v-if="indGame">
+         <div id="game_id"> #{{ indGame.label }} </div>
+         <p><b>Date: </b> {{ indGame.date }} <br>
+            <b>Time: </b> {{ indGame.time }} <br>
+            <b>Player Count: </b> {{ indGame.numPlayers }}/{{ indGame.totPlayers }} 
+         </p>
+         <button id="join_game" v-on:click="joinFunc">Join Game</button>
+      </div>
+
+   </div>
+   <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACBzOmCvUkVUutLit048gjvqXVrjCCmXE&callback=initMap&v=weekly&channel=2" async defer></script>
+</body>
+
+</html>
